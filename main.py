@@ -1,7 +1,7 @@
 from forensic_tool.mounter import Mounter
 
 if __name__ == "__main__":
-    image_path = "test_data/android.dd"
+    image_path = "/media/ubuntu/680A-77F1/android.dd"
     mount_dir = "mnt/selected_partition"
 
     mounter = Mounter(image_path, mount_dir)
