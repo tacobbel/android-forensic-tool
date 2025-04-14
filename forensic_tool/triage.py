@@ -9,6 +9,10 @@ class Triage:
     def extract_build_prop(self):
         # Typická cesta k build.prop v Android image
         build_prop_path = os.path.join(self.mount_dir, 'system', 'build.prop')
+        print(build_prop_path)
+
+        print("📁 Obsah adresára:")
+        print(os.listdir(os.path.join(self.mount_dir, 'system')))
 
         if not os.path.isfile(build_prop_path):
             print("❌ Súbor build.prop sa nenašiel.")
