@@ -5,4 +5,5 @@ if __name__ == "__main__":
     output_dir = "/home/ubuntu/triageOutput"
 
     triage = Triage(mount_dir, output_dir)
-    triage.extract_build_prop()
+    print("Triage starting")
+    triage.extract_file("system/build.prop")

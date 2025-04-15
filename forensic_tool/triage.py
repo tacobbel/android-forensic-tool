@@ -1,27 +1,42 @@
 import os
 import shutil
 
+from forensic_tool.logger import Logger
+
+
 class Triage:
     def __init__(self, mount_dir, output_dir):
         self.mount_dir = mount_dir
         self.output_dir = output_dir
+        self.logger = Logger(log_dir=output_dir)
 
-    def extract_build_prop(self):
-        # Typická cesta k build.prop v Android image
-        build_prop_path = os.path.join(self.mount_dir, 'system', 'build.prop')
-        print(build_prop_path)
+    def extract_file(self, relative_path):
+        source_path = os.path.join(self.mount_dir, relative_path)
+        self.logger.log(f"Searching for: {source_path}")
 
-        print("📁 Obsah adresára:")
-        print(os.listdir(os.path.join(self.mount_dir, 'system')))
-
-        if not os.path.isfile(build_prop_path):
-            print("❌ Súbor build.prop sa nenašiel.")
+        if not os.path.isfile(source_path):
+            msg = f"File not found: {source_path}"
+            print(msg)
+            self.logger.log(msg)
             return
 
-        target_dir = os.path.join(self.output_dir, 'build.prop')
+        # Názov súboru (napr. build.prop)
+        filename = os.path.basename(relative_path)
+
+        # Cieľový adresár = názov súboru bez prípony (napr. build)
+        target_dir_name = filename.split('.')[0]
+        target_dir = os.path.join(self.output_dir, target_dir_name)
         os.makedirs(target_dir, exist_ok=True)
+        self.logger.log(f"Target directory created: {target_dir}")
 
-        target_file = os.path.join(target_dir, 'build.prop')
-        shutil.copy2(build_prop_path, target_file)
+        target_file = os.path.join(target_dir, filename)
 
-        print(f"✅ Súbor build.prop bol extrahovaný do: {target_file}")
+        try:
+            shutil.copy2(source_path, target_file)
+            msg = f"File {filename} successfully copied to: {target_file}"
+            print(msg)
+            self.logger.log(msg)
+        except Exception as e:
+            msg = f"Error while copying {filename}: {e}"
+            print(msg)
+            self.logger.log(msg)
