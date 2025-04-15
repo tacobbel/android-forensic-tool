@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="triage working">
-      <change afterPath="$PROJECT_DIR$/forensic_tool/logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/mount_image_partition.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/android-forensic-tool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/android-forensic-tool.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forensic_tool/scripts/mount_partition.sh" beforeDir="false" />
+    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="logger done">
       <change beforePath="$PROJECT_DIR$/forensic_tool/triage.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/triage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +109,7 @@
       <workItem from="1744668012589" duration="1271000" />
       <workItem from="1744744871159" duration="2579000" />
       <workItem from="1744753894642" duration="293000" />
-      <workItem from="1744755220580" duration="284000" />
+      <workItem from="1744755220580" duration="585000" />
     </task>
     <task id="LOCAL-00001" summary="triage working">
       <option name="closed" value="true" />
@@ -125,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744668064987</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="logger done">
+      <option name="closed" value="true" />
+      <created>1744755520603</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744755520603</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,9 +135,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="triage working" />
-    <option name="LAST_COMMIT_MESSAGE" value="triage working" />
+    <MESSAGE value="logger done" />
+    <option name="LAST_COMMIT_MESSAGE" value="logger done" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1744755421851" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1744755557965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

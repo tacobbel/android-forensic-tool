@@ -20,10 +20,10 @@ class Triage:
             self.logger.log(msg)
             return
 
-        # Názov súboru (napr. build.prop)
+        # file name (e.g. build.prop)
         filename = os.path.basename(relative_path)
 
-        # Cieľový adresár = názov súboru bez prípony (napr. build)
+        # target directory = file name without extention (e.g. build)
         target_dir_name = filename.split('.')[0]
         target_dir = os.path.join(self.output_dir, target_dir_name)
         os.makedirs(target_dir, exist_ok=True)
