@@ -18,6 +18,7 @@ mkdir -p "$TARGET_DIR"
 echo "Loading image partitions $IMAGE ..."
 PARTS=$(fdisk -l "$IMAGE" | grep "^$IMAGE")
 
+
 if [ -z "$PARTS" ]; then
     echo "No partitions were found."
     exit 1
@@ -31,32 +32,12 @@ TMP_PARTS=$(mktemp)
 SECTOR_SIZE=512
 
 INDEX=1
-echo "$PARTS" | while read -r line; do
-    START=$(echo "$line" | awk '{print $2}')
-    END=$(echo "$line" | awk '{print $3}')
-    NAME=$(echo "$line" | awk '{print $1}')
-    
-    SECTORS=$((END - START + 1))
-    SIZE_BYTES=$((SECTORS * SECTOR_SIZE))
-    
-    if [ "$SIZE_BYTES" -lt $((1024*1024)) ]; then
-    SIZE_KB=$(awk "BEGIN {printf \"%.1f\", $SIZE_BYTES / 1024}")
-    SIZE_HR="${SIZE_KB} KB"
-    elif [ "$SIZE_BYTES" -lt $((1024*1024*1024)) ]; then
-    SIZE_MB=$(awk "BEGIN {printf \"%.1f\", $SIZE_BYTES / (1024*1024)}")
-    SIZE_HR="${SIZE_MB} MB"
-    else
-    SIZE_GB=$(awk "BEGIN {printf \"%.2f\", $SIZE_BYTES / (1024*1024*1024)}")
-    SIZE_HR="${SIZE_GB} GB"
-    fi
-
-    printf "[%2d] | %14d | %12d | %8d | %10s | %s\n" \
-    "$INDEX" "$START" "$END" "$SECTORS" "$SIZE_HR" "$NAME"
-
-
-    echo "$START:$NAME" >> "$TMP_PARTS"
+echo "$PARTS" | while IFS= read -r line; do
+    printf "[%2d] %s\n" "$INDEX" "$line"
+    echo "$line" >> "$TMP_PARTS"
     INDEX=$((INDEX + 1))
 done
+
 
 
 echo ""
@@ -70,17 +51,35 @@ if [ -z "$SELECTED_LINE" ]; then
     exit 1
 fi
 
-SELECTED_OFFSET=$(echo "$SELECTED_LINE" | cut -d: -f1)
-SELECTED_NAME=$(echo "$SELECTED_LINE" | cut -d: -f2)
+SELECTED_NAME=$(echo "$SELECTED_LINE" | sed -E 's/^(.+\.dd[0-9]+)\s+.*/\1/')
+SELECTED_OFFSET=$(echo "$SELECTED_LINE" | sed -E 's/^.+\.dd[0-9]+\s+([0-9]+).*/\1/')
+
+if ! [[ "$SELECTED_OFFSET" =~ ^[0-9]+$ ]]; then
+    echo "Invalid offset extracted: '$SELECTED_OFFSET'"
+    exit 1
+fi
 
 BYTE_OFFSET=$((SELECTED_OFFSET * SECTOR_SIZE))
 PART_SUFFIX=$(basename "$SELECTED_NAME" | grep -oE 'dd[0-9]+')
 
-read -p "Enter the name of the directory to mount the partition into (leave empty for default name): " CUSTOM_NAME
+ALLOWED_NAMES=("system" "data")
 
-if [ -z "$CUSTOM_NAME" ]; then
-    # fallback: use name of the partition (e.g. android.dd1)
-    CUSTOM_NAME=$(basename "$SELECTED_NAME")
+echo ""
+echo "Allowed names for mount directory: ${ALLOWED_NAMES[*]}"
+read -p "Enter the name of the directory to mount the partition into: " CUSTOM_NAME
+
+VALID=false
+for name in "${ALLOWED_NAMES[@]}"; do
+    if [[ "$CUSTOM_NAME" == "$name" ]]; then
+        VALID=true
+        break
+    fi
+done
+
+if [ "$VALID" = false ]; then
+    echo "Invalid name. Only the following are allowed: ${ALLOWED_NAMES[*]}"
+    rm "$TMP_PARTS"
+    exit 1
 fi
 
 MOUNT_POINT="$TARGET_DIR/$CUSTOM_NAME"
