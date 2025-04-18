@@ -8,9 +8,7 @@ class Logger:
         self.log_file = os.path.join(log_dir, f"triage_log_{timestamp}.txt")
 
     def log(self, message):
-        # Získaj aktuálny čas v UTC a lokalizuj ho
         now_utc = datetime.now(timezone.utc)
-        # Napríklad pre stredoeurópsky čas: UTC+2
         local_offset_hours = 2
         local_time = now_utc + timedelta(hours=local_offset_hours)
         timestamp = local_time.strftime(f"%Y-%m-%d %H:%M:%S UTC+{local_offset_hours}")

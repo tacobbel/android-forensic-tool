@@ -1,5 +1,7 @@
+import datetime
 import os
 import shutil
+from os import PathLike
 
 from forensic_tool.logger import Logger
 
@@ -10,8 +12,9 @@ class Triage:
         self.output_dir = output_dir
         self.logger = Logger(log_dir=output_dir)
 
-    def extract_file(self, relative_path):
-        source_path = os.path.join(self.mount_dir, relative_path)
+    def extract_file(self, relative_path: str | PathLike):
+
+        source_path : str = os.path.join(self.mount_dir, relative_path)
         self.logger.log(f"Searching for: {source_path}")
 
         if not os.path.isfile(source_path):
@@ -21,9 +24,21 @@ class Triage:
             return
 
         # file name (e.g. build.prop)
-        filename = os.path.basename(relative_path)
+        filename: str = os.path.basename(relative_path)
 
-        # target directory = file name without extention (e.g. build)
+
+        # get and log original time stamps of file
+        stat = os.stat(source_path)
+        accessed = datetime.datetime.fromtimestamp(stat.st_atime)
+        modified = datetime.datetime.fromtimestamp(stat.st_mtime)
+        changed = datetime.datetime.fromtimestamp(stat.st_ctime)
+
+        self.logger.log(f"Timestamps for {filename} before copy:")
+        self.logger.log(f"  Accessed: {accessed}")
+        self.logger.log(f"  Modified: {modified}")
+        self.logger.log(f"  Changed : {changed}")
+
+        # target directory = file name without extension (e.g. build)
         target_dir_name = filename.split('.')[0]
         target_dir = os.path.join(self.output_dir, target_dir_name)
         os.makedirs(target_dir, exist_ok=True)
