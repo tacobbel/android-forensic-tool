@@ -87,12 +87,13 @@ mkdir -p "$MOUNT_POINT"
 
 echo "Mounting partition $SELECTED_NAME to $MOUNT_POINT ..."
 
-sudo mount -o loop,offset=$BYTE_OFFSET "$IMAGE" "$MOUNT_POINT"
+LOOP_DEVICE=$(sudo losetup --find --show --offset $BYTE_OFFSET "$IMAGE")
+sudo mount "$LOOP_DEVICE" "$MOUNT_POINT"
 
 if [ $? -eq 0 ]; then
-    echo "✅ Successfully mounted to $MOUNT_POINT"
+    echo "Successfully mounted to $MOUNT_POINT"
 else
-    echo "❌ Failed to mount the selected partition. Make sure the partition contains a supported filesystem."
+    echo "Failed to mount the selected partition. Make sure the partition contains a supported filesystem."
 fi
 
 rm "$TMP_PARTS"

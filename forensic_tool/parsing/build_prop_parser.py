@@ -6,11 +6,11 @@ from forensic_tool.logger import Logger
 
 
 class BuildPropParser:
-    def __init__(self, mount_dir: str, output_dir: str, logger: Logger):
-        self.mount_dir = mount_dir
+    def __init__(self, input_path: str, output_dir: str, logger: Logger):
+        self.input_path = input_path
         self.output_dir = output_dir
         self.logger = logger
-        self.build_prop_path = Path(mount_dir) / "system" / "build.prop"
+        self.build_prop_path = Path(input_path) / "build" / "build.prop"
         self.keys_to_extract = [
             "ro.build.version.release",
             "ro.build.version.sdk",
