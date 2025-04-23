@@ -1,6 +1,9 @@
+import csv
 import datetime
+import hashlib
 import os
 import shutil
+import threading
 from os import PathLike
 
 from forensic_tool.logger import Logger
@@ -44,6 +47,9 @@ class Triage:
         os.makedirs(target_dir, exist_ok=True)
         self.logger.log(f"Target directory created: {target_dir}")
 
+        # compute hash value in the background
+        threading.Thread(target=self.compute_and_log_hash, args=(source_path,), daemon=False).start()
+
         target_file = os.path.join(target_dir, filename)
 
         try:
@@ -55,3 +61,33 @@ class Triage:
             msg = f"Error while copying {filename}: {e}"
             print(msg)
             self.logger.log(msg)
+
+    def compute_and_log_hash(self, file_path: str):
+        sha256 = hashlib.sha256()
+        try:
+            with open(file_path, "rb") as f:
+                for chunk in iter(lambda: f.read(4096), b""):
+                    sha256.update(chunk)
+            hash_value = sha256.hexdigest()
+            log_path = os.path.join(self.output_dir, "hashes.csv")
+            file_exists = os.path.isfile(log_path)
+
+            with open(log_path, "a", newline='', encoding="utf-8") as csvfile:
+                writer = csv.writer(csvfile)
+                if not file_exists:
+                    writer.writerow(["Filename", "Path", "SHA256", "Timestamp"])
+                writer.writerow([
+                    os.path.basename(file_path),
+                    file_path,
+                    hash_value,
+                    self.get_standard_timestamp()
+                ])
+            self.logger.log(f"SHA256 hash saved for {file_path}")
+        except Exception as e:
+            self.logger.log(f"Error while computing hash for {file_path}: {e}")
+
+    def get_standard_timestamp(self) -> str:
+        now_utc = datetime.datetime.now(datetime.timezone.utc)
+        local_offset_hours = 2
+        local_time = now_utc + datetime.timedelta(hours=local_offset_hours)
+        return local_time.strftime(f"%Y-%m-%d %H:%M:%S UTC+{local_offset_hours}")

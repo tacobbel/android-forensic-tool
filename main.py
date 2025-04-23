@@ -1,5 +1,6 @@
 from forensic_tool.logger import Logger
 from forensic_tool.parsing.build_prop_parser import BuildPropParser
+from forensic_tool.parsing.packages_parser import PackagesXmlParser
 from forensic_tool.reporting.overall_html_report import generate_combined_html_report
 from forensic_tool.triage import Triage
 
@@ -10,9 +11,12 @@ if __name__ == "__main__":
     # triage phase
     system_triage = Triage(mount_dir, output_dir)
     data_triage = Triage(mount_dir, output_dir)
+
     print("Triage starting")
 
     system_triage.extract_file("system/build.prop")
+    data_triage.extract_file("data/system/packages.xml")
+
 
     # --- USER-DEFINED SECTION START ---
     # you can add more files for triage
@@ -26,6 +30,9 @@ if __name__ == "__main__":
     # parsing phase
     build_prop_parser = BuildPropParser(output_dir, output_dir, parser_logger)
     build_prop_parser.parse()
+
+    packages_parser = PackagesXmlParser(output_dir, output_dir, parser_logger)
+    packages_parser.parse()
 
     # --- USER-DEFINED SECTION START ---
     # you can add more files to parse using your own parsers

@@ -6,11 +6,11 @@ from forensic_tool.logger import Logger
 
 
 class BuildPropParser:
-    def __init__(self, input_path: str, output_dir: str, logger: Logger):
-        self.input_path = input_path
+    def __init__(self, file_to_parse: str, output_dir: str, logger: Logger):
+        self.input_path = file_to_parse
         self.output_dir = output_dir
         self.logger = logger
-        self.build_prop_path = Path(input_path) / "build" / "build.prop"
+        self.build_prop_path = Path(file_to_parse) / "build" / "build.prop"
         self.keys_to_extract = [
             "ro.build.version.release",
             "ro.build.version.sdk",
@@ -42,7 +42,9 @@ class BuildPropParser:
                     if key in self.keys_to_extract:
                         parsed_data[key] = value
 
-            self.logger.log(f"Extracted {len(parsed_data)} values from build.prop")
+            count = len([key for key in self.keys_to_extract if key in parsed_data])
+
+
         except Exception as e:
             msg = f"Error while reading build.prop: {e}"
             print(msg)
@@ -60,7 +62,7 @@ class BuildPropParser:
                 for key in self.keys_to_extract:
                     writer.writerow([key, parsed_data.get(key, "N/A")])
 
-            msg = f"build.prop info exported to: {output_file}"
+            msg = f"build.prop parsed: {count} values extracted and saved to: {self.build_prop_path}"
             print(msg)
             self.logger.log(msg)
         except Exception as e:

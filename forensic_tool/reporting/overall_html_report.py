@@ -1,5 +1,7 @@
 from pathlib import Path
 from forensic_tool.reporting.build_prop_html import generate_build_prop_section
+from forensic_tool.reporting.packages_html import generate_packages_section
+
 
 def generate_combined_html_report(output_dir: str, html_name: str = "case_report.html"):
     html_path = Path(output_dir) / html_name
@@ -46,6 +48,7 @@ def generate_combined_html_report(output_dir: str, html_name: str = "case_report
     ]
 
     html_parts.append(generate_build_prop_section(output_dir))
+    html_parts.append(generate_packages_section(output_dir))
 
     # --- USER-DEFINED SECTION START ---
     # you can add new sections to the html report
