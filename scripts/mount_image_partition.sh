@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <path_to_image.dd> <target_directory>"
+    echo -e "Usage: sudo $0 <path_to_image.dd> <target_directory>\nThis script must be run as root."
     exit 1
 fi
 

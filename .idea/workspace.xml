@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="html report generating was reworked, mount_image_partition.sh can mount multiple partitions in a row">
-      <change afterPath="$PROJECT_DIR$/forensic_tool/analyzing/packages_analyzer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/packages_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forensic_tool/reporting/packages_html.py" afterDir="false" />
+    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="packages parser + analyzer, hash file generating while triage">
+      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/accounts_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/uid_errors_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/wpa_supplicant_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forensic_tool/parsing/build_prop_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/parsing/build_prop_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forensic_tool/reporting/build_prop_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/reporting/build_prop_html.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forensic_tool/reporting/overall_html_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/reporting/overall_html_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forensic_tool/triage.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/triage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mount_image_partition.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mount_image_partition.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +65,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/forensic_tool" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="android-forensic-tool" />
@@ -83,7 +85,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/forensic_tool/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -124,7 +126,14 @@
       <workItem from="1744984836621" duration="10163000" />
       <workItem from="1745156804528" duration="3787000" />
       <workItem from="1745352869025" duration="8422000" />
-      <workItem from="1745415867721" duration="5388000" />
+      <workItem from="1745415867721" duration="5438000" />
+      <workItem from="1745961124999" duration="177000" />
+      <workItem from="1745961333409" duration="11000" />
+      <workItem from="1745961376280" duration="3143000" />
+      <workItem from="1746755976139" duration="3774000" />
+      <workItem from="1746802662255" duration="2776000" />
+      <workItem from="1746806558430" duration="404000" />
+      <workItem from="1746813197969" duration="734000" />
     </task>
     <task id="LOCAL-00001" summary="triage working">
       <option name="closed" value="true" />
@@ -190,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745363258802</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="packages parser + analyzer, hash file generating while triage">
+      <option name="closed" value="true" />
+      <created>1745441934489</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745441934489</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,9 +222,10 @@
     <MESSAGE value="logging during parsing phase added" />
     <MESSAGE value="html generator prototype implemented" />
     <MESSAGE value="html report generating was reworked, mount_image_partition.sh can mount multiple partitions in a row" />
-    <option name="LAST_COMMIT_MESSAGE" value="html report generating was reworked, mount_image_partition.sh can mount multiple partitions in a row" />
+    <MESSAGE value="packages parser + analyzer, hash file generating while triage" />
+    <option name="LAST_COMMIT_MESSAGE" value="packages parser + analyzer, hash file generating while triage" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1745441833145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1746805986561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
