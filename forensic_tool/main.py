@@ -3,11 +3,10 @@ import os
 from forensic_tool.logger import Logger
 from forensic_tool.parsing.accounts_parser import AccountsDbParser
 from forensic_tool.parsing.build_prop_parser import BuildPropParser
-from forensic_tool.parsing.file_system_parser import FileSystemParser
 from forensic_tool.parsing.packages_parser import PackagesXmlParser
 from forensic_tool.parsing.uid_errors_parser import UidErrorsParser
 from forensic_tool.parsing.wpa_supplicant_parser import WpaSupplicantParser
-from forensic_tool.reporting.overall_html_report import generate_combined_html_report
+from forensic_tool.reporting.overall_html_report import generate_combined_html_report_eng, generate_combined_html_report_sk
 from forensic_tool.triage import Triage
 
 if __name__ == "__main__":
@@ -24,7 +23,6 @@ if __name__ == "__main__":
     triage.extract_file("data/system/users/0/accounts.db")
     triage.extract_file("data/misc/wifi/wpa_supplicant.conf")
     triage.extract_file("data/system/uiderrors.txt")
-
 
 
     # --- USER-DEFINED SECTION START ---
@@ -59,4 +57,5 @@ if __name__ == "__main__":
     # --- USER-DEFINED SECTION END ---
 
     # reporting phase
-    generate_combined_html_report(output_dir)
+    generate_combined_html_report_eng(output_dir)
+    generate_combined_html_report_sk(output_dir)

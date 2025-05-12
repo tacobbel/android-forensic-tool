@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="packages parser + analyzer, hash file generating while triage">
-      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/accounts_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/uid_errors_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forensic_tool/parsing/wpa_supplicant_parser.py" afterDir="false" />
+    <list default="true" id="61f4b0dd-700f-42ee-89bd-d15e948db4ee" name="Changes" comment="new parsing modules implemented">
+      <change afterPath="$PROJECT_DIR$/forensic_tool/analyzing/accounts_analyzer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/analyzing/uid_errors_analyzer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/analyzing/wpa_supplicant_analyzer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/reporting/accounts_html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/reporting/uid_errors_html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forensic_tool/reporting/wpa_supplicant_html.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/mount_image_partition.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mount_image_partition.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forensic_tool/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forensic_tool/parsing/uid_errors_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/parsing/uid_errors_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forensic_tool/reporting/build_prop_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/reporting/build_prop_html.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forensic_tool/reporting/overall_html_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/reporting/overall_html_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forensic_tool/reporting/packages_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/forensic_tool/reporting/packages_html.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +139,8 @@
       <workItem from="1746755976139" duration="3774000" />
       <workItem from="1746802662255" duration="2776000" />
       <workItem from="1746806558430" duration="404000" />
-      <workItem from="1746813197969" duration="734000" />
+      <workItem from="1746813197969" duration="764000" />
+      <workItem from="1747065365011" duration="6488000" />
     </task>
     <task id="LOCAL-00001" summary="triage working">
       <option name="closed" value="true" />
@@ -207,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745441934489</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="new parsing modules implemented">
+      <option name="closed" value="true" />
+      <created>1746815298203</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746815298203</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,9 +238,10 @@
     <MESSAGE value="html generator prototype implemented" />
     <MESSAGE value="html report generating was reworked, mount_image_partition.sh can mount multiple partitions in a row" />
     <MESSAGE value="packages parser + analyzer, hash file generating while triage" />
-    <option name="LAST_COMMIT_MESSAGE" value="packages parser + analyzer, hash file generating while triage" />
+    <MESSAGE value="new parsing modules implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="new parsing modules implemented" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1746805986561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/android_forensic_tool$main.coverage" NAME="main Coverage Results" MODIFIED="1747074589702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

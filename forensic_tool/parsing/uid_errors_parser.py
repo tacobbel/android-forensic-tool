@@ -2,6 +2,7 @@ import csv
 import os
 from pathlib import Path
 from forensic_tool.logger import Logger
+from datetime import datetime, timezone, timedelta
 
 class UidErrorsParser:
     def __init__(self, file_to_parse: str, output_dir: str, logger: Logger):
@@ -29,8 +30,9 @@ class UidErrorsParser:
                 for line in infile:
                     if ": " not in line:
                         continue
-                    timestamp, message = line.strip().split(": ", 1)
-                    writer.writerow([timestamp.strip(), message.strip()])
+                    timestamp_raw, message = line.strip().split(": ", 1)
+                    timestamp_utc = self.convert_to_utc(timestamp_raw.strip())
+                    writer.writerow([timestamp_utc, message.strip()])
 
             msg = f"uiderrors.txt parsed and saved to: {output_file}"
             print(msg)
@@ -40,3 +42,12 @@ class UidErrorsParser:
             msg = f"Error while parsing uiderrors.txt: {e}"
             print(msg)
             self.logger.log(msg)
+
+    def convert_to_utc(self, ts_string: str) -> str:
+        try:
+            local_dt = datetime.strptime(ts_string, "%d.%m.%y %H:%M")
+            local_offset_hours = 2
+            utc_dt = local_dt - timedelta(hours=local_offset_hours)
+            return utc_dt.strftime("%Y-%m-%d %H:%M:%S UTC")
+        except:
+            return "N/A"
