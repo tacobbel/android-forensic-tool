@@ -1,13 +1,14 @@
 import os
-from forensic_tool.analyzing.wpa_supplicant_analyzer import WpaSupplicantAnalyzer
+from forensic_app.analyzing.packages_analyzer import PackagesAnalyzer
 
-def generate_wpa_supplicant_section(output_dir: str) -> str:
-    analyzer = WpaSupplicantAnalyzer(
-        csv_path=os.path.join(output_dir, "wpa_supplicant", "wifi_profiles.csv")
+def generate_packages_section(output_dir: str) -> str:
+
+    analyzer = PackagesAnalyzer(
+        csv_path=os.path.join(output_dir, "packages", "packages_info.csv")
     )
     stats = analyzer.analyze()
 
-    section = ['<details><summary>Wi-Fi profiles analysis (wpa_supplicant.conf)</summary><ul>']
+    section = ['<details><summary>Installed packages analysis (packages.xml)</summary><ul>']
     for key, value in stats.items():
         if isinstance(value, list):
             section.append(f"<li><strong>{key}:</strong><ul>")
@@ -19,13 +20,13 @@ def generate_wpa_supplicant_section(output_dir: str) -> str:
     section.append("</ul></details>")
     return "\n".join(section)
 
-def generate_wpa_supplicant_section_sk(output_dir: str) -> str:
-    analyzer = WpaSupplicantAnalyzer(
-        csv_path=os.path.join(output_dir, "wpa_supplicant", "wifi_profiles.csv")
+def generate_packages_section_sk(output_dir: str) -> str:
+    analyzer = PackagesAnalyzer(
+        csv_path=os.path.join(output_dir, "packages", "packages_info.csv")
     )
     stats = analyzer.analyze()
 
-    section = ['<details><summary>Analýza Wi-Fi profilov (wpa_supplicant.conf)</summary><ul>']
+    section = ['<details><summary>Analýza nainštalovaných balíkov (packages.xml)</summary><ul>']
     for key, value in stats.items():
         translated_key = translate_key_sk(key)
         if isinstance(value, list):
@@ -40,10 +41,11 @@ def generate_wpa_supplicant_section_sk(output_dir: str) -> str:
 
 def translate_key_sk(key: str) -> str:
     dictionary = {
-        "Total Wi-Fi profiles": "Celkový počet Wi-Fi profilov",
-        "Profiles with password (PSK)": "Profily s heslom (PSK)",
-        "Profiles with BSSID": "Profily s BSSID",
-        "Unique SSIDs": "Jedinečné SSID",
-        "Top key management methods": "Najčastejšie metódy správy kľúčov",
+        "Total apps": "Celkový počet aplikácií",
+        "System apps": "Systémové aplikácie",
+        "User apps": "Používateľské aplikácie",
+        "Top install dirs": "Top inštalačné adresáre",
+        "Earliest install": "Najskoršia inštalácia",
+        "Latest install": "Najnovšia inštalácia"
     }
     return dictionary.get(key, key)

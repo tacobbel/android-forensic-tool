@@ -2,7 +2,7 @@ import csv
 import os
 from pathlib import Path
 
-from forensic_tool.logger import Logger
+from forensic_app.logger import Logger
 
 
 class BuildPropParser:

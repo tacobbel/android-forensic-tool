@@ -6,7 +6,13 @@ import shutil
 import threading
 from os import PathLike
 
-from forensic_tool.logger import Logger
+from forensic_app.logger import Logger
+
+def get_standard_timestamp() -> str:
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    local_offset_hours = 2
+    local_time = now_utc + datetime.timedelta(hours=local_offset_hours)
+    return local_time.strftime(f"%Y-%m-%d %H:%M:%S UTC+{local_offset_hours}")
 
 
 class Triage:
@@ -26,9 +32,8 @@ class Triage:
             self.logger.log(msg)
             return
 
-        # file name (e.g. build.prop)
+        # get file name from relative path (e.g. build.prop)
         filename: str = os.path.basename(relative_path)
-
 
         # get and log original time stamps of file
         stat = os.stat(source_path)
@@ -80,14 +85,8 @@ class Triage:
                     os.path.basename(file_path),
                     file_path,
                     hash_value,
-                    self.get_standard_timestamp()
+                    get_standard_timestamp()
                 ])
             self.logger.log(f"SHA256 hash saved for {file_path}")
         except Exception as e:
             self.logger.log(f"Error while computing hash for {file_path}: {e}")
-
-    def get_standard_timestamp(self) -> str:
-        now_utc = datetime.datetime.now(datetime.timezone.utc)
-        local_offset_hours = 2
-        local_time = now_utc + datetime.timedelta(hours=local_offset_hours)
-        return local_time.strftime(f"%Y-%m-%d %H:%M:%S UTC+{local_offset_hours}")

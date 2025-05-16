@@ -2,7 +2,7 @@ import os
 import csv
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from forensic_tool.logger import Logger
+from forensic_app.logger import Logger
 from datetime import datetime
 
 
@@ -59,7 +59,6 @@ class PackagesXmlParser:
                     name, version, user_id, code_path,
                     installed_at, updated_at, "Yes" if is_system else "No"
                 ])
-
                 count += 1
 
         msg = f"packages.xml parsed: {count} packages extracted and saved to: {csv_path}"

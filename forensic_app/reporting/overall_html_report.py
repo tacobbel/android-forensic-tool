@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from forensic_tool.reporting.accounts_html import generate_accounts_section_eng, generate_accounts_section_sk
-from forensic_tool.reporting.build_prop_html import generate_build_prop_section_eng, generate_build_prop_section_sk
-from forensic_tool.reporting.packages_html import generate_packages_section, generate_packages_section_sk
-from forensic_tool.reporting.uid_errors_html import generate_uid_errors_section, generate_uid_errors_section_sk
-from forensic_tool.reporting.wpa_supplicant_html import generate_wpa_supplicant_section, \
+from forensic_app.reporting.accounts_html import generate_accounts_section_eng, generate_accounts_section_sk
+from forensic_app.reporting.build_prop_html import generate_build_prop_section_eng, generate_build_prop_section_sk
+from forensic_app.reporting.packages_html import generate_packages_section, generate_packages_section_sk
+from forensic_app.reporting.uid_errors_html import generate_uid_errors_section, generate_uid_errors_section_sk
+from forensic_app.reporting.wpa_supplicant_html import generate_wpa_supplicant_section, \
     generate_wpa_supplicant_section_sk
 
 
@@ -59,7 +59,7 @@ def generate_combined_html_report_eng(output_dir: str, html_name: str = "case_re
     html_parts.append(generate_uid_errors_section(output_dir))
 
     # --- USER-DEFINED SECTION START ---
-    # add new sections to the html report
+    # add new sections to the html report here
     # e.g. html_parts.append(generate_your_new_section(...))
     # --- USER-DEFINED SECTION END ---
 
@@ -122,7 +122,8 @@ def generate_combined_html_report_sk(output_dir: str, html_name: str = "case_rep
     html_parts.append(generate_uid_errors_section_sk(output_dir))
 
     # --- USER-DEFINED SECTION START ---
-    # sem môžeš pridávať ďalšie slovenské sekcie
+    # add new sections to the html report here
+    # e.g. html_parts.append(generate_your_new_section(...))
     # --- USER-DEFINED SECTION END ---
 
     html_parts.append("</body></html>")

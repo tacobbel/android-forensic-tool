@@ -2,7 +2,7 @@ import sqlite3
 import csv
 import os
 from pathlib import Path
-from forensic_tool.logger import Logger
+from forensic_app.logger import Logger
 
 class AccountsDbParser:
     def __init__(self, file_to_parse: str, output_dir: str, logger: Logger):

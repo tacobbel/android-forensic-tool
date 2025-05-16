@@ -1,5 +1,5 @@
 import os
-from forensic_tool.analyzing.uid_errors_analyzer import UidErrorsAnalyzer
+from forensic_app.analyzing.uid_errors_analyzer import UidErrorsAnalyzer
 
 def generate_uid_errors_section(output_dir: str) -> str:
     analyzer = UidErrorsAnalyzer(

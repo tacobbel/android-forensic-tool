@@ -35,7 +35,7 @@ class UidErrorsAnalyzer:
             except:
                 pass
 
-            # get first boot details
+            # first boot details
             if "first boot" in message or "factory reset" in message:
                 if first_boot_time == "Not found":
                     first_boot_time = timestamp

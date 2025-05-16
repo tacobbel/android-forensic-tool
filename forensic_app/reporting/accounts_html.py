@@ -1,5 +1,5 @@
 import os
-from forensic_tool.analyzing.accounts_analyzer import AccountsAnalyzer
+from forensic_app.analyzing.accounts_analyzer import AccountsAnalyzer
 
 def generate_accounts_section_eng(output_dir: str) -> str:
     analyzer = AccountsAnalyzer(

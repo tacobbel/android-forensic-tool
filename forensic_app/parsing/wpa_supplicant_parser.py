@@ -1,7 +1,7 @@
 import os
 import csv
 from pathlib import Path
-from forensic_tool.logger import Logger
+from forensic_app.logger import Logger
 
 class WpaSupplicantParser:
     def __init__(self, file_to_parse: str, output_dir: str, logger: Logger):
